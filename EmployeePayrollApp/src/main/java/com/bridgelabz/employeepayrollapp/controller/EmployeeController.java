@@ -2,10 +2,9 @@ package com.bridgelabz.employeepayrollapp.controller;
 
 import org.springframework.web.bind.annotation.*;
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDTO;
+import com.bridgelabz.employeepayrollapp.model.Employee;
 import com.bridgelabz.employeepayrollapp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -15,22 +14,22 @@ public class EmployeeController {
     private EmployeeService employeeService;
     
     @GetMapping
-    public List<EmployeeDTO> getEmployees() {
-        return employeeService.getEmployees();
+    public List<Employee> getEmployees() {
+        return employeeService.getAllEmployees();
     }
     
     @GetMapping("/{id}")
-    public EmployeeDTO getEmployeeById(@PathVariable Long id) {
+    public Employee getEmployeeById(@PathVariable Long id) {
         return employeeService.getEmployeeById(id);
     }
     
     @PostMapping
-    public EmployeeDTO createEmployee(@RequestBody EmployeeDTO employee) {
+    public Employee createEmployee(@RequestBody EmployeeDTO employee) {
         return employeeService.createEmployee(employee);
     }
     
     @PutMapping("/{id}")
-    public EmployeeDTO updateEmployee(@PathVariable Long id, @RequestBody EmployeeDTO employee) {
+    public Employee updateEmployee(@PathVariable Long id, @RequestBody EmployeeDTO employee) {
         return employeeService.updateEmployee(id, employee);
     }
     

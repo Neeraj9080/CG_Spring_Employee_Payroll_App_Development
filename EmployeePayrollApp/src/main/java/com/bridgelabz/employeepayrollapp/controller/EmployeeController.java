@@ -10,31 +10,35 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/employees")
 public class EmployeeController {
-    @Autowired
-    private EmployeeService employeeService;
-    
-    @GetMapping
-    public List<Employee> getEmployees() {
-        return employeeService.getAllEmployees();
-    }
-    
-    @GetMapping("/{id}")
-    public Employee getEmployeeById(@PathVariable Long id) {
-        return employeeService.getEmployeeById(id);
-    }
-    
-    @PostMapping
-    public Employee createEmployee(@RequestBody EmployeeDTO employee) {
-        return employeeService.createEmployee(employee);
-    }
-    
-    @PutMapping("/{id}")
-    public Employee updateEmployee(@PathVariable Long id, @RequestBody EmployeeDTO employee) {
-        return employeeService.updateEmployee(id, employee);
-    }
-    
-    @DeleteMapping("/{id}")
-    public void deleteEmployee(@PathVariable Long id) {
-        employeeService.deleteEmployee(id);
-    }
+	  private final EmployeeService employeeService;
+
+	    @Autowired
+	    public EmployeeController(EmployeeService employeeService) {
+	        this.employeeService = employeeService;
+	    }
+
+	    @GetMapping
+	    public List<Employee> getAllEmployees() {
+	        return employeeService.getAllEmployees();
+	    }
+
+	    @GetMapping("/{id}")
+	    public Employee getEmployeeById(@PathVariable Long id) {
+	        return employeeService.getEmployeeById(id);
+	    }
+
+	    @PostMapping
+	    public Employee createEmployee(@RequestBody EmployeeDTO employeeDTO) {
+	        return employeeService.createEmployee(employeeDTO);
+	    }
+
+	    @PutMapping("/{id}")
+	    public Employee updateEmployee(@PathVariable Long id, @RequestBody EmployeeDTO employeeDTO) {
+	        return employeeService.updateEmployee(id, employeeDTO);
+	    }
+
+	    @DeleteMapping("/{id}")
+	    public boolean deleteEmployee(@PathVariable Long id) {
+	        return employeeService.deleteEmployee(id);
+	    }
 }

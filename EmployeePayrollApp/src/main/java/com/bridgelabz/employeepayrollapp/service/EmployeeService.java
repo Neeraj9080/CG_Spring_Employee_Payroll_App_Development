@@ -19,6 +19,11 @@ public class EmployeeService {
     public EmployeeService(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
+    
+    public List<Employee> getEmployeesByDepartment() {
+        log.info("Getting employees by department: Sales");
+        return employeeRepository.findEmployeesByDepartment();
+    }
 
     // Get all employees
     public List<Employee> getAllEmployees() {

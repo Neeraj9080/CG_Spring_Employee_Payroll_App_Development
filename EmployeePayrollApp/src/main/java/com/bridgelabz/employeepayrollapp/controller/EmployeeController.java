@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.*;
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDTO;
 import com.bridgelabz.employeepayrollapp.model.Employee;
 import com.bridgelabz.employeepayrollapp.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @RestController
@@ -12,7 +11,6 @@ import java.util.List;
 public class EmployeeController {
 	  private final EmployeeService employeeService;
 
-	    @Autowired
 	    public EmployeeController(EmployeeService employeeService) {
 	        this.employeeService = employeeService;
 	    }
@@ -40,5 +38,10 @@ public class EmployeeController {
 	    @DeleteMapping("/{id}")
 	    public boolean deleteEmployee(@PathVariable Long id) {
 	        return employeeService.deleteEmployee(id);
+	    }
+	    
+	    @GetMapping("/department/sales")
+	    public List<Employee> getEmployeesByDepartment() {
+	        return employeeService.getEmployeesByDepartment();
 	    }
 }

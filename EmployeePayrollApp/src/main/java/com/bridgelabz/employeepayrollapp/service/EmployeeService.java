@@ -30,10 +30,16 @@ public class EmployeeService {
         return employeeRepository.findById(id)
                 .orElseThrow(() -> new EmployeeNotFoundException("Employee not found with id " + id));
     }
-    // Create employee
+ // Create employee
     public Employee createEmployee(EmployeeDTO employeeDTO) {
+        log.info("Creating new employee: {}", employeeDTO.getName());
         Employee employee = new Employee();
         employee.setName(employeeDTO.getName());
+        employee.setGender(employeeDTO.getGender());
+        employee.setStartDate(employeeDTO.getStartDate());
+        employee.setNote(employeeDTO.getNote());
+        employee.setProfilePic(employeeDTO.getProfilePic());
+        employee.setDepartment(employeeDTO.getDepartment());
         employee.setSalary(employeeDTO.getSalary());
         return employeeRepository.save(employee);
     }
@@ -58,6 +64,8 @@ public class EmployeeService {
         }
         return false; // Employee not found
     }
+    
+    
 }
 
 

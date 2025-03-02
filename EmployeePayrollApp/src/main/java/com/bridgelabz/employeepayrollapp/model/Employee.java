@@ -1,46 +1,32 @@
 package com.bridgelabz.employeepayrollapp.model;
 
-import jakarta.persistence.*;
+import java.time.LocalDate;
+import lombok.Data;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "employees")
+@Data
 public class Employee {
+	    @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    private Long id;
 
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private Double salary;
+	    private String name;
 
-    public Employee() {}
+	    private String gender;
 
-    public Employee(String name, double salary) {
-        this.name = name;
-        this.salary = salary;
-    }
-    
-    public Long getId() {
-        return id;
-    }
+	    private LocalDate startDate;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	    private String note;
 
-    public String getName() {
-        return name;
-    }
+	    private String profilePic;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	    private String department;
 
-    public double getSalary() {
-        return salary;
-    }
-
-    public void setSalary(double salary) {
-        this.salary = salary;
-    }
-
+	    private Double salary;
 }

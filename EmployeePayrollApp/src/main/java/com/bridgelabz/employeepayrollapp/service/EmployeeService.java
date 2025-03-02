@@ -8,6 +8,7 @@ import com.bridgelabz.employeepayrollapp.dto.EmployeeDTO;
 import com.bridgelabz.employeepayrollapp.model.Employee;
 import com.bridgelabz.employeepayrollapp.repository.EmployeeRepository;
 
+import customexception.EmployeeNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
@@ -26,9 +27,9 @@ public class EmployeeService {
 
     // Get employee by ID
     public Employee getEmployeeById(Long id) {
-        return employeeRepository.findById(id).orElse(null); // Returns null if not found
+        return employeeRepository.findById(id)
+                .orElseThrow(() -> new EmployeeNotFoundException("Employee not found with id " + id));
     }
-
     // Create employee
     public Employee createEmployee(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();

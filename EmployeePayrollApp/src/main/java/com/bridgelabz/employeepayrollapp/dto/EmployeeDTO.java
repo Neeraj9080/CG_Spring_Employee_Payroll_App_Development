@@ -11,6 +11,6 @@ public class EmployeeDTO {
     @Pattern(regexp = "^[A-Z][a-zA-Z\\s]+$", message = "Name should start with uppercase")
     private String name;
 
-    @Min(value = 5000, message = "Salary should be at least 5000")
+    @Min(value = 1000, message = "Salary should be at least 5000")
     private Double salary;
 }

@@ -1,47 +1,48 @@
 package com.bridgelabz.employeepayrollapp.controller;
 
-import org.springframework.web.bind.annotation.*;
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDTO;
 import com.bridgelabz.employeepayrollapp.model.Employee;
 import com.bridgelabz.employeepayrollapp.service.EmployeeService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/employees")
+@RequestMapping("/employees")
 public class EmployeeController {
-	  private final EmployeeService employeeService;
-
-	    public EmployeeController(EmployeeService employeeService) {
-	        this.employeeService = employeeService;
-	    }
-
-	    @GetMapping
-	    public List<Employee> getAllEmployees() {
-	        return employeeService.getAllEmployees();
-	    }
-
-	    @GetMapping("/{id}")
-	    public Employee getEmployeeById(@PathVariable Long id) {
-	        return employeeService.getEmployeeById(id);
-	    }
-
-	    @PostMapping
-	    public Employee createEmployee(@RequestBody EmployeeDTO employeeDTO) {
-	        return employeeService.createEmployee(employeeDTO);
-	    }
-
-	    @PutMapping("/{id}")
-	    public Employee updateEmployee(@PathVariable Long id, @RequestBody EmployeeDTO employeeDTO) {
-	        return employeeService.updateEmployee(id, employeeDTO);
-	    }
-
-	    @DeleteMapping("/{id}")
-	    public boolean deleteEmployee(@PathVariable Long id) {
-	        return employeeService.deleteEmployee(id);
-	    }
-	    
-	    @GetMapping("/department/sales")
-	    public List<Employee> getEmployeesByDepartment() {
-	        return employeeService.getEmployeesByDepartment();
-	    }
+    
+    @Autowired
+    private EmployeeService employeeService;
+    
+    //localhost:8080/employees
+    @GetMapping
+    public ResponseEntity<List<Employee>> getAllEmployees() {
+        return ResponseEntity.ok(employeeService.getAllEmployees());
+    }
+    
+    //localhost:8080/employees/{id}
+    @GetMapping("/{id}")
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
+        return ResponseEntity.ok(employeeService.getEmployeeById(id));
+    }
+    
+    //localhost:8080/employees
+    @PostMapping
+    public ResponseEntity<Employee> createEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) {
+        return ResponseEntity.ok(employeeService.createEmployee(employeeDTO));
+    }
+    
+    //localhost:8080/employees/{id}
+    @PutMapping("/{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @Valid @RequestBody EmployeeDTO employeeDTO) {
+        return ResponseEntity.ok(employeeService.updateEmployee(id, employeeDTO));
+    }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteEmployee(@PathVariable Long id) {
+        employeeService.deleteEmployee(id);
+        return ResponseEntity.ok("Employee deleted successfully");
+    }
 }

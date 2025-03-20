@@ -1,37 +1,68 @@
 package com.bridgelabz.employeepayrollapp.dto;
 
-import java.time.LocalDate;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.PastOrPresent;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import lombok.Data;
+import java.time.LocalDate;
 
 @Data
 public class EmployeeDTO {
-    @NotEmpty(message = "Name cannot be empty")
-    @Pattern(regexp = "^[A-Z][a-zA-Z\\s]+$", message = "Name should start with uppercase")
+
+    @NotBlank(message = "Name is mandatory")
     private String name;
     
-    @NotBlank(message = "Gender cannot be empty")
+    @NotBlank(message = "Gender is required")
+    @Pattern(regexp = "Male|Female|Other", message = "Gender should be Male, Female, or Other")
     private String gender;
-
+    
+    @NotBlank(message = "Department is required")
+    private String department;
+    
+    @Min(value = 3000, message = "Salary must be at least 3000")
+    private double salary;
+    
     @PastOrPresent(message = "Start date cannot be in the future")
-    @JsonFormat(pattern = "dd MMM yyyy")
     private LocalDate startDate;
 
-    @NotBlank(message = "Note cannot be empty")
-    private String note;
+	public String getName() {
+		return name;
+	}
 
-    @NotBlank(message = "Profile picture cannot be empty")
-    private String profilePic;
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    @NotBlank(message = "Department cannot be empty")
-    private String department;
+	public String getGender() {
+		return gender;
+	}
 
-    @Min(value = 5000, message = "Salary should be at least 5000")
-    private Double salary;
-}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	public double getSalary() {
+		return salary;
+	}
+
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+
+	public LocalDate getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
+	}
+
+    
+} 
+

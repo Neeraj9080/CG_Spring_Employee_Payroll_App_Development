@@ -1,32 +1,83 @@
 package com.bridgelabz.employeepayrollapp.model;
 
+import jakarta.persistence.*;
+import lombok.*;
 import java.time.LocalDate;
-import lombok.Data;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "employees")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Employee {
-	    @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long id;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(nullable = false)
+    private String name;
+    
+    @Column(nullable = false)
+    private String gender;
+    
+    @Column(nullable = false)
+    private String department;
+    
+    @Column(nullable = false)
+    private double salary;
+    
+	private LocalDate startDate;
 
-	    private String name;
+	public Long getId() {
+		return id;
+	}
 
-	    private String gender;
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-	    private LocalDate startDate;
+	public String getName() {
+		return name;
+	}
 
-	    private String note;
+	public void setName(String name) {
+		this.name = name;
+	}
 
-	    private String profilePic;
+	public String getGender() {
+		return gender;
+	}
 
-	    private String department;
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
-	    private Double salary;
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	public double getSalary() {
+		return salary;
+	}
+
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+
+	public LocalDate getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
+	}
+
+	
 }
